@@ -1,0 +1,22 @@
+server:
+  http:
+    addr: 0.0.0.0:8000
+    timeout: 1s
+  grpc:
+    addr: 0.0.0.0:9000
+    timeout: 1s
+data:
+  database:
+    driver: mysql
+    source: root:123@tcp(127.0.0.1:3307)/gin_test?charset=utf8mb4&parseTime=true
+    min_idle_conns: 10
+    max_open_conns: 100
+    con_max_left_time: 1
+    databases: gin_test
+  redis:
+    addr: 127.0.0.1:6379
+    password:
+    db: 0
+    pool_size: 50
+    min_idle_conns: 10
+    max_retries: 3

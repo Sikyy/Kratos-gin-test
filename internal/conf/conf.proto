@@ -1,0 +1,52 @@
+syntax = "proto3";
+package kratos.api;
+
+option go_package = "kratosGin/internal/conf;conf";
+
+import "google/protobuf/duration.proto";
+
+message Bootstrap {
+  Server server = 1;
+  Data data = 2;
+}
+
+message Server {
+  message HTTP {
+    string network = 1;
+    string addr = 2;
+    google.protobuf.Duration timeout = 3;
+  }
+  message GRPC {
+    string network = 1;
+    string addr = 2;
+    google.protobuf.Duration timeout = 3;
+  }
+  HTTP http = 1;
+  GRPC grpc = 2;
+}
+
+message Data {
+  message Database {
+    string driver = 1;
+    string source = 2;
+    int32 min_idle_conns = 3;
+    int32 max_open_conns = 4;
+    int32 con_max_left_time = 5;
+    string databases = 6;
+  }
+  message Redis {
+    string network = 1;
+    string addr = 2;
+    string password = 3;
+    int32 db = 4;
+    int32 pool_size = 5;
+    int32 min_idle_conns = 6;
+    int32 max_retries = 7;
+  }
+  message Clickhouse {
+    string addr = 1;
+  }
+  Database database = 1;
+  Redis redis = 2;
+  Clickhouse clickhouse = 3;
+}
